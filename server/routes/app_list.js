@@ -214,7 +214,7 @@ router.post("/information/deep_sleep", async (req, res) => { //인포메이션 �
     
 });
 
-router.post("/information/recommand", async (req, res) => { //인포메이션 찾기
+router.post("/information/recommend", async (req, res) => { //인포메이션 찾기
    
     var cat = "breathing"
 
