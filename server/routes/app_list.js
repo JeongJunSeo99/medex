@@ -178,9 +178,8 @@ router.post("/information", async (req, res) => { //인포메이션 찾기
 
 router.post("/information/deep_sleep", async (req, res) => { //인포메이션 찾기
    
-    var cat = "deep_sleep"
 
-    Information.find({ category: cat }, (err,info) => {
+    Information.find({},(err,info) => {
         if (err){
             const result123 = {
                 code: 100,
@@ -215,83 +214,9 @@ router.post("/information/deep_sleep", async (req, res) => { //인포메이션 �
     
 });
 
-router.post("/information/breathing", async (req, res) => { //인포메이션 찾기
+router.post("/information/recommand", async (req, res) => { //인포메이션 찾기
    
     var cat = "breathing"
-
-    Information.find({ category: cat }, (err,info) => {
-        if (err){
-            const result123 = {
-                code: 100,
-                msg: 'server nodt'
-            };
-            res.send(result123);
-            const result = {
-                code: 500,
-                msg: 'server error'
-            };
-            res.send(result);
-        }
-        else if(info){
-            const r1 = [{
-                code: 200,
-                msg: 'sucess',
-                category : info.category,
-                content : info.content
-            }];
-            res.send(info);
-        }
-        else{
-            const re = {
-                code: 400,
-                msg: 'data null'
-            };
-            res.send(re);
-        }
-    });
-    
-});
-
-router.post("/information/stretching", async (req, res) => { //인포메이션 찾기
-   
-    var cat = "stretching"
-
-    Information.find({ category: cat }, (err,info) => {
-        if (err){
-            const result123 = {
-                code: 100,
-                msg: 'server nodt'
-            };
-            res.send(result123);
-            const result = {
-                code: 500,
-                msg: 'server error'
-            };
-            res.send(result);
-        }
-        else if(info){
-            const r1 = [{
-                code: 200,
-                msg: 'sucess',
-                category : info.category,
-                content : info.content
-            }];
-            res.send(info);
-        }
-        else{
-            const re = {
-                code: 400,
-                msg: 'data null'
-            };
-            res.send(re);
-        }
-    });
-    
-});
-
-router.post("/information/snore", async (req, res) => { //인포메이션 찾기
-   
-    var cat = "snore"
 
     Information.find({ category: cat }, (err,info) => {
         if (err){
