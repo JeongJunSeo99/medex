@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const Bed = require("../models/bed");
-const Mat = require("../models/mat_data");
+const Mat_data = require("../models/mat_data");
 const Information = require("../models/information");
 const Today = require("../models/today");
 const Enviroment_data = require("../models/enviroment_data");
@@ -94,30 +94,159 @@ router.post("/en", async (req, res) => {
 
 router.post("/mat", async (req, res) => { 
     try { // id 비교 
-        serial = req.body.serialnum
 
+        console.log("실행");
         let day = new Date(); // 현재 시간 구하는 함수
         //let cur_time = day.toLocaleString();
-        let cur_time = day.getTime();
+        let time1 = req.body.t1;
+        var time2 = req.body.t2;
+        var i = time1;
+        var j = time1 + 420000;
+        var cur = req.body.cur;
+        var set = req.body.set;
+        var s_day = req.body.day;
 
-        mat = new Mat({
-            mh_sn : serial,
-            ble_connect : "a",
-            current_temp : req.body.cur, /*default, max, unique ... */
-            setting_temp : req.body.set,
-            off_time : 1,
-            on_time : 1,
-            mode : 1,
-            cover: 1,
-            water_level: 1,
-            pump: 1,
-            heater: 1,
-            error: 1,
-            time : cur_time,
-            s_day : 0
-            });
+        for(i ; i<time2 ; i+=3000){
+            console.log("실행" + i)
 
-        const saveMat=await mat.save();
+            if(i == time1 + 7200000){
+                const rand = Math.floor(Math.random() * 3) + 1;
+
+                if( 28 < set < 34){
+
+                    const a = Math.floor(Math.random() * 10) + 1;
+
+                    for(var b; b<rand;b++){
+
+                        if(a < 6){
+                            cur ++;
+                        }
+                        else{
+                            cur--
+                        }
+                    }
+                }
+                else if(28>= set){
+                    set++;
+                }
+                else if(32<= set){
+                    set --;
+                }
+            }
+            else if(i == time1 + 14400000){
+                const rand = Math.floor(Math.random() * 3) + 1;
+
+                if( 28 < set < 34){
+
+                    const a = Math.floor(Math.random() * 10) + 1;
+
+                    for(var b; b<rand;b++){
+
+                        if(a < 6){
+                            cur ++;
+                        }
+                        else{
+                            cur--
+                        }
+                    }
+                }
+                else if(28>= set){
+                    set++;
+                }
+                else if(32<= set){
+                    set --;
+                }
+            }
+
+            if(i == time1 + 60000){
+                if(cur > set + 1){
+                    cur--;
+                }
+                else{
+                    cur ++;
+                }
+            }
+            else if(i == time1 + 120000){
+                if(cur > set + 1){
+                    cur--;
+                }
+                else{
+                    cur ++;
+                }
+            }
+            else if(i == time1 + 180000){
+                if(cur > set + 1){
+                    cur--;
+                }
+                else{
+                    cur ++;
+                }
+            }
+            else if(i == time1 + 240000){
+                if(cur > set + 1){
+                    cur--;
+                }
+                else{
+                    cur ++;
+                }
+            }
+            else if(i == time1 + 300000){
+                if(cur > set + 1){
+                    cur--;
+                }
+                else{
+                    cur ++;
+                }
+            }
+            console.log("if문 실행");
+
+            for(j ; j<time2; j += 60000){
+                if(i == j){
+                    if(cur > set + 1){
+                        cur--;
+                    }
+                    else if(cur < set -2){
+                        cur ++;
+                    }
+                    else{
+                        const a = Math.floor(Math.random() * 10) + 1;
+                        if(a==1 || a==2){
+                            cur ++;
+                        }
+                        else if(a==3 || a==4){
+                            cur--
+                        }
+                    }
+                    
+                }
+                console.log(cur);
+            }
+            console.log("두번째 for문");
+
+            var mat_time = i.toString();
+
+            let mat = new Mat_data({
+                mh_sn : "H10000000000",
+                ble_connect : 1,
+                current_temp : cur, /*default, max, unique ... */
+                setting_temp : set,
+                off_time : 0,
+                on_time : 0,
+                mode : 1,
+                cover: 0,
+                water_level: 1,
+                pump: 1,
+                heater: 1,
+                error: 0,
+                time : mat_time,
+                s_day : s_day
+                });
+    
+            const saveMat_data=await mat.save();
+            console.log("저장");
+        }
+
+        console.log("End");
         const r1 = {
             code: 200,
             msg: 'sucess'

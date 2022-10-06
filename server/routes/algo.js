@@ -91,51 +91,52 @@ router.post('/file_up', upload.array('file'), async (req, res) => { //현준이�
 router.post("/mdx", async (req, res) => {
     
     try {
-        // 맞춤형 온도 서비스 모델에 사용
-        serial = req.body.serialnum;
-
-        var mat_1 = await Mat.find({serial: serial, s_day : { $gt: 0 } }, 
-        {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true});
-
-        const mat_json = JSON.parse(JSON.stringify(mat_1));
-      
-        const fields = ['mh_sn', 'current_temp', 'setting_temp', 'time', 's_day'];
-        const opts = { fields };
-
-        const parser = new Parser(opts);
-        const csv = parser.parse(mat_json);
-        
-        csvWriter
-            .writeRecords(mat_json)
-            .then(()=> console.log(csvWriter.getHeaderString()));
-        
-
-        /*
+    
         let options = {
-            args: csv
+            args: "/home/hadoop/Desktop/medex/server/mdx_data.csv"
         };
-        
-        PythonShell.run("./data_creation.py", options, function(err, data) {
-            if (err) throw err;
-            console.log(data);
-        });
+        var a = [];
 
-        res.send("ok");
-        */
-        /*
-        let p_options = {
-            scriptPath: '/home/hadoop/Desktop/Medex/server',
-            args: ['value1', 'value2']/home/hadoop/Desktop/Medex/server
-          };
-        
-        let pyshell = new PythonShell('logistic_regression.py', p_options);
-        //pyshell.send('/home/hadoop/Desktop/Medex/server/mdx_data.csv');
-        pyshell.send('./mdx_data.csv')
-        pyshell.on('msg', (msg) => {
-	        console.log(msg)
+        PythonShell.run("./logistic_regression.py", options, function(err, data) {
+            if (err) throw err;
+            console.log(data.length);
+            let a,b,c,d,e;
+            console.log(data[0]);
+            console.log(data[0].length);
+            if(data[0].length == 3){
+                a = data[0].substr(1, 1);
+            }
+            else if(data[0].length == 6){
+                a = data[0].substr(1, 1);
+                b = data[0].substr(4, 1);
+                
+            }
+            else if(data[0].length == 9){
+                a = data[0].substr(1, 1);
+                b = data[0].substr(4, 1);
+                c = data[0].substr(7, 1);
+            }
+            else if(data[0].length == 12){
+                a = data[0].substr(1, 1);
+                b = data[0].substr(4, 1);
+                c = data[0].substr(7, 1);
+                d = data[0].substr(10, 1);
+            }
+            else if(data[0].length == 15){
+                a = data[0].substr(1, 1);
+                b = data[0].substr(4, 1);
+                c = data[0].substr(7, 1);
+                d = data[0].substr(10, 1);
+                e = data[0].substr(13, 1);
+            }
             
-        })
-        */
+            console.log(a + b + c + d + e);
+            
+
+        });
+ 
+        //snoring,snoringS,moving,sound,bmi,stime
+        res.send("ok");
     }
     catch (error) {
         console.error(error.message);

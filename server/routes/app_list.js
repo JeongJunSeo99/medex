@@ -179,7 +179,7 @@ router.post("/information", async (req, res) => { //인포메이션 찾기
 router.post("/information/deep_sleep", async (req, res) => { //인포메이션 찾기
    
 
-    Information.find({},(err,info) => {
+    Information.find((err,info) => {
         if (err){
             const result123 = {
                 code: 100,
@@ -391,7 +391,7 @@ router.post("/sleep_check", async (req, res) => {
         let day = new Date(); // 현재 시간 구하는 함수
         //let cur_time = day.toLocaleString();
         let cur_time = day.getTime();
-        let bed = await Bed.findOne({ serialnum: serial, msg: "sleep" }).sort({"_id":-1}).limit(1);
+        let bed = await Bed.findOne({ serial: serial, msg: "sleep" }).sort({"_id":-1}).limit(1);
         if(bed){
             tmp = bed.sleep_seq + 1; //전 날 수면체크 + 1
 
@@ -445,10 +445,16 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
         //하루치 수면 데이터 저장 할 때, 데이터 값을 하나 추가해 DB에 저장해 다른 날들과 구별해서 저장
         serial = req.body.serialnum
         let day = new Date(); // 현재 시간 구하는 함수
+        console.log("1");
         let tmp2 = day.getTime();
-        let sleep = await Bed.findOne({ serialnum: serial, msg: "sleep" }).sort({"_id":-1}).limit(1);
+        console.log("1");
+        let sleep = await Bed.findOne({ serial: serial, msg: "sleep" }).sort({"_id":-1}).limit(1);
+        console.log(sleep);
         tmp1 = sleep.time;
+        console.log("1");
+
         var en = await Enviroment_data.find({serial: serial, time: {$gt : tmp1, $lt : tmp2} });
+        console.log("1");
         var snore = await Snore_data.find({serial: serial, time: {$gt : tmp1, $lt : tmp2} });
         var tem_avg = 0;
         var hum_avg = 0;
@@ -647,7 +653,7 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
             */
         }
 
-        let bed_wake = await Bed.findOne({ serialnum: serial, msg: "wake" }).sort({"_id":-1}).limit(1);
+        let bed_wake = await Bed.findOne({ serial: serial, msg: "wake" }).sort({"_id":-1}).limit(1);
 
         if(bed_wake){
             var tmp = bed_wake.wake_seq + 1; //전 날 수면체크 + 1
