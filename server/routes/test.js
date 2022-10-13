@@ -13,34 +13,71 @@ const multer = require("multer");
 const schedule = require('node-schedule');
 const { PythonShell }= require("python-shell");
 var fs = require("fs");
+var gaussian = require('../ran/gaussian');
+
+router.post("/ga", async (req, res) => { 
+    try { // id 비교 
+        var distribution = gaussian(880, 40);
+    // Take a random sample using inverse transform sampling method.
+        var sample = distribution.random(100);
+
+        console.log(sample[1]);
+        
+    } 
+    catch (error) {
+        console.error(error.message);
+        const result = {
+            code: 500,
+            msg: 'server error'
+        };
+        res.send(result);
+    } 
+});
 
 
 router.post("/snore", async (req, res) => { 
     try { // id 비교 
-        serial = req.body.serialnum
+        let time1 = req.body.t1;
+        var time2 = req.body.t2;
+        var i = time1;
+        var c = req.body.ch;
 
-        let day = new Date(); // 현재 시간 구하는 함수
-        let cur_time = day.getTime();
-        let min = day.getMinutes();
-        let c = 1;
-        snore = new Snore_data({
-            serial : serial,
-            min : min,
-            time : cur_time,
-            snore_db1 : req.body.snore_db1,
-            snore_db2 : req.body.snore_db2,
-            snore_db3 : req.body.snore_db3,
-            snore_db4 : req.body.snore_db4,
-            snore_db5 : req.body.snore_db5,
-            snore_db6 : req.body.snore_db6,
-            snore_db7 : req.body.snore_db7,
-            snore_db8 : req.body.snore_db8,
-            snore_db9 : req.body.snore_db9,
-            snore_db10 : req.body.snore_db10,
-            check : c
-        });
+        var distribution = gaussian(880, 40);
+        var sample = distribution.random(100000);
+        Math.floor(sample);
+        var j = 0;
 
-        const saveSnore_data=await snore.save();
+        console.log(sample);
+
+        for(i ; i<time2 ; i+=3000){
+            const date = new Date(i);
+            let min = date.getMinutes();
+
+            var mat_time = i.toString();
+
+            snore = new Snore_data({
+                serial : "D",
+                min : min,
+                time : mat_time,
+                snore_db1 : Math.floor(sample[j]),
+                snore_db2 : Math.floor(sample[j+1]),
+                snore_db3 : Math.floor(sample[j+2]),
+                snore_db4 : Math.floor(sample[j+3]),
+                snore_db5 : Math.floor(sample[j+4]),
+                snore_db6 : Math.floor(sample[j+5]),
+                snore_db7 : Math.floor(sample[j+6]),
+                snore_db8 : Math.floor(sample[j+7]),
+                snore_db9 : Math.floor(sample[j+8]),
+                snore_db10 : Math.floor(sample[j+9]),
+                check : c
+            });
+    
+            const saveSnore_data=await snore.save();
+            console.log(sample[j] + "    " + j);
+            j += 10;
+        }
+
+        console.log("End");
         const r1 = {
             code: 200,
             msg: 'sucess'

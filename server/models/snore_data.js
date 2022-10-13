@@ -14,6 +14,7 @@ const Snore_data = new mongoose.Schema({
     snore_db10 : {type:Number},
     time : {type:Number},
     min : {type:Number},
+    hour : {type:Number},
     check : {type:String}
 })
  

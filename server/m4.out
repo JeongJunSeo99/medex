@@ -1,0 +1,87 @@
+(node:634480) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:634480) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+Express is listening on port 3001
+connected mongodb server!
+(node:634480) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+connected mqtt broker server
+H10000000000
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665448584253',
+  path: 'uploads/file-1665448584253',
+  size: 84536
+}
+destinatin에 저장된 파일 명 :  file-1665448584253
+업로드된 파일의 전체 경로  uploads/file-1665448584253
+사용자가 업로드한 파일 명 :  H10000000000.h5
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665448584253',
+  path: 'uploads/file-1665448584253',
+  size: 84536
+}
+H10000000000
+기존 파일 삭제
+(node:634480) DeprecationWarning: collection.update is deprecated. Use updateOne, updateMany, or bulkWrite instead.
+[Object: null prototype] {}
+[
+  {
+    fieldname: 'file',
+    originalname: 'H10000000000.h5',
+    encoding: '7bit',
+    mimetype: 'text/plain',
+    destination: './uploads',
+    filename: 'file-1665448584253',
+    path: 'uploads/file-1665448584253',
+    size: 84536
+  }
+]
+H10000000000
+H10000000000
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665460588283',
+  path: 'uploads/file-1665460588283',
+  size: 84536
+}
+destinatin에 저장된 파일 명 :  file-1665460588283
+업로드된 파일의 전체 경로  uploads/file-1665460588283
+사용자가 업로드한 파일 명 :  H10000000000.h5
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665460588283',
+  path: 'uploads/file-1665460588283',
+  size: 84536
+}
+H10000000000
+기존 파일 삭제
+[Object: null prototype] {}
+[
+  {
+    fieldname: 'file',
+    originalname: 'H10000000000.h5',
+    encoding: '7bit',
+    mimetype: 'text/plain',
+    destination: './uploads',
+    filename: 'file-1665460588283',
+    path: 'uploads/file-1665460588283',
+    size: 84536
+  }
+]

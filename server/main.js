@@ -139,6 +139,7 @@ client.on('message', async (topic,message)=>{
         let day = new Date(); // 현재 시간 구하는 함수
         let cur_time = day.getTime();
         let min = day.getMinutes();
+        let hour = day.getHours();
 
         if(snore_data.out_snore==1){
             bed_c = {
@@ -174,6 +175,7 @@ client.on('message', async (topic,message)=>{
         let s_d = Snore_data({
             serial : snore_data.mh_sn,
             min : min,
+            hour : hour,
             time : cur_time,
             snore_db1 : snore_data.snore_db1,
             snore_db2 : snore_data.snore_db2,
@@ -684,6 +686,8 @@ app.post("/mat_control", async (req, res) => {
     }
 });
 
+
+/*
 const j1 = schedule.scheduleJob('0 0 0 * * *', async function(){
     try {
         console.log("0시 실행");
@@ -960,16 +964,7 @@ const j4 = schedule.scheduleJob('0 0 6 * * *', async function(){
 
                 
                 if(j+2==snore.length){
-                    /*
-                    if(snore[j+1].check =="1"){
-                        s4 = Math.max(snore[j+1].snore_db1, snore[j+1].snore_db2, snore[j+1].snore_db3, snore[j+1].snore_db4, snore[j+1].snore_db5, 
-                            snore[j+1].snore_db6, snore[j+1].snore_db7, snore[j+1].snore_db8, snore[j+1].snore_db9, snore[j+1].snore_db10);
-
-                        snore_sec.push(s4);
-                        console.log(snore_sec);
-                        s_count++;
-                    }
-                    */
+ 
                     if(s_count == 0){
                         s3 = 0 ;
                     }
@@ -1366,16 +1361,7 @@ const j8 = schedule.scheduleJob('0 0 14 * * *', async function(){
 
                 
                 if(j+2==snore.length){
-                    /*
-                    if(snore[j+1].check =="1"){
-                        s4 = Math.max(snore[j+1].snore_db1, snore[j+1].snore_db2, snore[j+1].snore_db3, snore[j+1].snore_db4, snore[j+1].snore_db5, 
-                            snore[j+1].snore_db6, snore[j+1].snore_db7, snore[j+1].snore_db8, snore[j+1].snore_db9, snore[j+1].snore_db10);
-
-                        snore_sec.push(s4);
-                        console.log(snore_sec);
-                        s_count++;
-                    }
-                    */
+ 
                     if(s_count == 0){
                         s3 = 0 ;
                     }
@@ -1773,16 +1759,7 @@ const j12 = schedule.scheduleJob('0 0 22 * * *', async function(){
 
                 
                 if(j+2==snore.length){
-                    /*
-                    if(snore[j+1].check =="1"){
-                        s4 = Math.max(snore[j+1].snore_db1, snore[j+1].snore_db2, snore[j+1].snore_db3, snore[j+1].snore_db4, snore[j+1].snore_db5, 
-                            snore[j+1].snore_db6, snore[j+1].snore_db7, snore[j+1].snore_db8, snore[j+1].snore_db9, snore[j+1].snore_db10);
 
-                        snore_sec.push(s4);
-                        console.log(snore_sec);
-                        s_count++;
-                    }
-                    */
                     if(s_count == 0){
                         s3 = 0 ;
                     }
@@ -1899,7 +1876,7 @@ const j12 = schedule.scheduleJob('0 0 22 * * *', async function(){
     }
 
 });
-
+*/
 
 
 /*

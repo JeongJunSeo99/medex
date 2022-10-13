@@ -1,4 +1,5 @@
 const express = require("express");
+const User = require("../models/user");
 const Mat = require("../models/mat_data");
 const File = require("../models/file");
 const router = express.Router();          
@@ -95,7 +96,8 @@ router.post("/mdx", async (req, res) => {
         let options = {
             args: "/home/hadoop/Desktop/medex/server/mdx_data.csv"
         };
-        var a = [];
+        var rec = [];
+        var rec_s = [];
 
         PythonShell.run("./logistic_regression.py", options, function(err, data) {
             if (err) throw err;
@@ -105,22 +107,32 @@ router.post("/mdx", async (req, res) => {
             console.log(data[0].length);
             if(data[0].length == 3){
                 a = data[0].substr(1, 1);
+                rec.push(a);
             }
             else if(data[0].length == 6){
                 a = data[0].substr(1, 1);
                 b = data[0].substr(4, 1);
-                
+                rec.push(a);
+                rec.push(b);
             }
             else if(data[0].length == 9){
                 a = data[0].substr(1, 1);
                 b = data[0].substr(4, 1);
                 c = data[0].substr(7, 1);
+                rec.push(a);
+                rec.push(b);
+                rec.push(c);
             }
             else if(data[0].length == 12){
                 a = data[0].substr(1, 1);
                 b = data[0].substr(4, 1);
                 c = data[0].substr(7, 1);
                 d = data[0].substr(10, 1);
+                rec.push(a);
+                rec.push(b);
+                rec.push(c);
+                rec.push(d);
+
             }
             else if(data[0].length == 15){
                 a = data[0].substr(1, 1);
@@ -128,13 +140,52 @@ router.post("/mdx", async (req, res) => {
                 c = data[0].substr(7, 1);
                 d = data[0].substr(10, 1);
                 e = data[0].substr(13, 1);
-            }
+                rec.push(a);
+                rec.push(b);
+                rec.push(c);
+                rec.push(d);
+                rec.push(e);
             
-            console.log(a + b + c + d + e);
+            }
+
             
 
+            for(var i = 0; i<rec.length; i++){
+                if(rec[i]==0){
+                    rec_s.push("코골이");
+                }
+                else if(rec[i] == 1){
+                    rec_s.push("뒤척임");
+                }
+                else if(rec[i] == 2){
+                    rec_s.push("소음");
+                }
+                else if(rec[i] == 3){
+                    rec_s.push("bmi");
+                }
+                else if(rec[i] == 4){
+                    rec_s.push("수면시간");
+                }
+                else if(rec[i] == -1){
+                    rec_s.push("추천정보 없음");
+                }
+            }
+            console.log(rec);
+            console.log(rec_s);
+            
         });
- 
+
+        setTimeout( async function() {
+            let user = await User.update({serialnum : "H10000000000" }, {
+                $set: {
+                    rec : rec_s
+                }
+            });
+            console.log("save");
+          }, 5000);
+
+        
+
         //snoring,snoringS,moving,sound,bmi,stime
         res.send("ok");
     }
@@ -158,7 +209,7 @@ router.get("/serial_res", async (req, res) => {// 초기 학습 시 시리얼 �
             var serial = user[i].serialnum;
 >*/
             let options = {
-                args: 1234
+                args: "H10000000000"
             };
             
 
@@ -243,9 +294,9 @@ router.post("/learn", async (req, res) => { //초기 학습을 위한 데이터 
         console.log(req.body.serialnum);
         serial = req.body.serialnum;
 
-        var mat_1 = await Mat.find({serial: serial, s_day : { $gt: 0 } }, 
+        var mat_1 = await Mat.find({mh_sn: serial, s_day : { $gt: 0 } }, 
         {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true});
-
+        
         const mat_json = JSON.parse(JSON.stringify(mat_1));
 
         res.send(mat_1);
@@ -268,7 +319,7 @@ router.post("/learn_add", async (req, res) => { //추가 학습을 위한 데이
         serial = req.body.serialnum;
         var max;
 
-        var mat_max = await Mat.find({serial: serial, s_day : { $gt: 0 } }, 
+        var mat_max = await Mat.find({mh_sn: serial, s_day : { $gt: 0 } }, 
         {"_id":false, "s_day":true});
 
         for (var i = 0; i < mat_max.length; i++){
@@ -278,7 +329,7 @@ router.post("/learn_add", async (req, res) => { //추가 학습을 위한 데이
             }
         }
         
-        var mat_1 = await Mat.find({serial: serial, s_day : { $gte: max } }, 
+        var mat_1 = await Mat.find({mh_sn: serial, s_day :9 /*{ $gte: max }*/ }, 
         {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true});
         
         console.log(mat_1);
@@ -302,8 +353,8 @@ router.post("/rec", async (req, res) => { //온도 추천을 위한 데이터 �
         // 맞춤형 온도 서비스 모델에 사용
         serial = req.body.serialnum;
 
-        var mat_1 = await Mat.find({serial: serial, s_day : { $gt: 0 } }, 
-        {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true}).sort({"_id":-1}).limit(20);
+        var mat_1 = await Mat.find({mh_sn: serial, s_day : 9/*{ $gt: 0 }*/ }, 
+        {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true}).sort({"_id":-1}).limit(4180);
         
         const mat_json = JSON.parse(JSON.stringify(mat_1));
         console.log(mat_1);
@@ -325,7 +376,7 @@ router.post("/rec", async (req, res) => { //온도 추천을 위한 데이터 �
 router.post("/python", async (req, res) => {
     
     try {
-        var mat_1 = await Mat.find({serial: req.body.serialnum, s_day : { $gt: 0 } }, 
+        var mat_1 = await Mat.find({mh_sn: req.body.serialnum, s_day : { $gt: 0 } }, 
         {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true});
         
         let options = {

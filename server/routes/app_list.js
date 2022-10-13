@@ -387,10 +387,15 @@ router.post("/pw_2", async (req, res) => { //비밀번호 찾기(비밀번호 �
 router.post("/sleep_check", async (req, res) => {
     try { // id 비교
         serial = req.body.serialnum
-
+        time = req.body.time
         let day = new Date(); // 현재 시간 구하는 함수
         //let cur_time = day.toLocaleString();
         let cur_time = day.getTime();
+
+        if(time){
+            cur_time = time.toString();
+        }
+
         let bed = await Bed.findOne({ serial: serial, msg: "sleep" }).sort({"_id":-1}).limit(1);
         if(bed){
             tmp = bed.sleep_seq + 1; //전 날 수면체크 + 1
@@ -444,9 +449,15 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
     try { 
         //하루치 수면 데이터 저장 할 때, 데이터 값을 하나 추가해 DB에 저장해 다른 날들과 구별해서 저장
         serial = req.body.serialnum
+        time = req.body.time
+
         let day = new Date(); // 현재 시간 구하는 함수
         console.log("1");
         let tmp2 = day.getTime();
+        if(time){
+            tmp2 = time.toString();
+        }
+
         console.log("1");
         let sleep = await Bed.findOne({ serial: serial, msg: "sleep" }).sort({"_id":-1}).limit(1);
         console.log(sleep);
@@ -527,131 +538,75 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
             }
         }
 
-        for( i=0; i<snore.length; i++){
-            // snore 저장 시 min 값 저장
-            
-            //수면 시작 후 1분 단위로 코골이 값 평균 저장
-            var j = i
 
-            if(i==0){
-                if(snore[i].min != snore[i+1].min){
-                    if(snore[i].check == "1"){
-                        var s1 = 0;
-                        var s2 = 0;
-                        s1 =Math.max(snore[i].snore_db1, snore[i].snore_db2, snore[i].snore_db3, snore[i].snore_db4, snore[i].snore_db5, 
-                            snore[i].snore_db6, snore[i].snore_db7, snore[i].snore_db8, snore[i].snore_db9, snore[i].snore_db10);
-                        snore_min.push(s1);
-                    }
-                    else{
-                        snore_min.push(0);
-                    }
-                }
+        var j = 0;
+
+        while(j+1<snore.length && snore[j].min == snore[j+1].min){
+
+            var s1 = 0;
+            var s2 = 0;
+            var s3 = 0;
+            var s4 = 0;
+            var s5 = 0;
+            var s_f =0;
+            var snore_sec = [];
+            
+            
+            console.log("b");
+
+            if(snore[j].check == "1"){
+                console.log("c");
+                s1 =Math.max(snore[j].snore_db1, snore[j].snore_db2, snore[j].snore_db3, snore[j].snore_db4, snore[j].snore_db5, 
+                    snore[j].snore_db6, snore[j].snore_db7, snore[j].snore_db8, snore[j].snore_db9, snore[j].snore_db10);
+
+                snore_sec.push(s1);
+                console.log(snore_sec);
+                s_count++;
             }
 
-            while(j+1<snore.length && snore[j].min == snore[j+1].min){
-
-                var s1 = 0;
-                var s2 = 0;
-                var s3 = 0;
-                var s4 = 0;
-                var s5 = 0;
-                var s_f =0;
-                var snore_sec = [];
-                
-                
-                console.log("b");
-
-                if(snore[j].check == "1"){
-                    console.log("c");
-                    s1 =Math.max(snore[j].snore_db1, snore[j].snore_db2, snore[j].snore_db3, snore[j].snore_db4, snore[j].snore_db5, 
-                        snore[j].snore_db6, snore[j].snore_db7, snore[j].snore_db8, snore[j].snore_db9, snore[j].snore_db10);
-
-                    snore_sec.push(s1);
-                    console.log(snore_sec);
-                    s_count++;
+            
+            if(j+2==snore.length){
+                if(s_count == 0){
+                    s3 = 0 ;
                 }
-
-                
-                if(j+2==snore.length){
-                    /*
-                    if(snore[j+1].check =="1"){
-                        s4 = Math.max(snore[j+1].snore_db1, snore[j+1].snore_db2, snore[j+1].snore_db3, snore[j+1].snore_db4, snore[j+1].snore_db5, 
-                            snore[j+1].snore_db6, snore[j+1].snore_db7, snore[j+1].snore_db8, snore[j+1].snore_db9, snore[j+1].snore_db10);
-
-                        snore_sec.push(s4);
-                        console.log(snore_sec);
-                        s_count++;
-                    }
-                    */
-                    if(s_count == 0){
-                        s3 = 0 ;
-                    }
-                    else{
-                        for(a=0;a<snore_sec.length;a++){
-                            if(s3 < snore_sec[a]){
-                                s3 = snore_sec[a];
-                            }
+                else{
+                    for(a=0;a<snore_sec.length;a++){
+                        if(s3 < snore_sec[a]){
+                            s3 = snore_sec[a];
                         }
                     }
-                    snore_min.push(s3);
-                    s_count = 0;
-                    console.log("코골이 : " + snore_min);
                 }
-                else if(snore[j].min != snore[j+2].min){
-                    if(s_count == 0){
-                        s3 = 0 ;
-                    }
-                    else{
-                        for(a=0;a<snore_sec.length;a++){
-                            if(s3<snore_sec[a]){
-                                s3 = snore_sec[a];
-                            }
-                        }    
-                    }
-                    snore_min.push(s3);
-                    s_count = 0;
-                    console.log("코골이 : " + snore_min);
+                snore_min.push(s3);
+                s_count = 0;
+                console.log("코골이 : " + snore_min);
+                break;
+            }
+            else if(snore[j].min != snore[j+2].min){
+                if(s_count == 0){
+                    s3 = 0 ;
                 }
+                else{
+                    for(a=0;a<snore_sec.length;a++){
+                        if(s3<snore_sec[a]){
+                            s3 = snore_sec[a];
+                        }
+                    }    
+                }
+                snore_min.push(s3);
+                s_count = 0;
+                console.log("코골이 : " + snore_min);
+            }
 
-                console.log("e");
+            console.log("e");
+
+             if(snore[j+1].min != snore[j+2].min){
+                j += 2;
+            }
+            else{
                 j++;
-            }     
-
+            }
             
-            /*
-
-            ---------------------------------------------------------------------------
-            if(snore[i].코골이 존재 == true){
-                if(i!=0){
-                    if(snore[i-1].코골이 존재 == false){
-                        var a[].append() = snore[i-1].time
-                    }
-                }
-
-                코골이 존재하는 시간 + 분값을 전부 받음
-                코골이 true인 데이터 개수 * 5초 = 전체 코골이 시간
-                코골이 true인 데이터 시간
-                
-            }
-
-            if(snore[i].코골이 존재 == false){
-                if(i!=0){
-                    if(snore[i-1].코골이 존재 == true){
-                        var b[].append() = snore[i-1].time
-                    }
-                }
-                //만약 일어나기 직전까지 코를 곤다면 a[], b[] 원소의 개수가 달라지므로, 예외처리해야함
-                // a[].length != b[].length 이라면 b[] 마지막 원소에 일어나기 직전 시간 추가
-                
-
-
-                코골이 존재하는 시간 + 분값을 전부 받음
-                코골이 true인 데이터 개수 * 5초 = 전체 코골이 시간
-                코골이 true인 데이터 시간
-                
-            }
-            */
-        }
+        }     
 
         let bed_wake = await Bed.findOne({ serial: serial, msg: "wake" }).sort({"_id":-1}).limit(1);
 

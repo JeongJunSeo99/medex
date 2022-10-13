@@ -54,6 +54,10 @@ name: {
     type: String,
     required: true
 },
+rec: {
+    type: Array,
+    required: true
+}
 });
 
 module.exports = User = mongoose.model("user", UserSchema);
