@@ -56,7 +56,7 @@ router.post("/snore", async (req, res) => {
             var mat_time = i.toString();
 
             snore = new Snore_data({
-                serial : "D",
+                serial : "H10000000000",
                 min : min,
                 time : mat_time,
                 snore_db1 : Math.floor(sample[j]),

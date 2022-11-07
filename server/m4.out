@@ -85,3 +85,823 @@ H10000000000
     size: 84536
   }
 ]
+H10000000000
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665922507868',
+  path: 'uploads/file-1665922507868',
+  size: 84536
+}
+destinatin에 저장된 파일 명 :  file-1665922507868
+업로드된 파일의 전체 경로  uploads/file-1665922507868
+사용자가 업로드한 파일 명 :  H10000000000.h5
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665922507868',
+  path: 'uploads/file-1665922507868',
+  size: 84536
+}
+H10000000000
+기존 파일 삭제
+[Object: null prototype] {}
+[
+  {
+    fieldname: 'file',
+    originalname: 'H10000000000.h5',
+    encoding: '7bit',
+    mimetype: 'text/plain',
+    destination: './uploads',
+    filename: 'file-1665922507868',
+    path: 'uploads/file-1665922507868',
+    size: 84536
+  }
+]
+H10000000000
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665923160268',
+  path: 'uploads/file-1665923160268',
+  size: 84536
+}
+destinatin에 저장된 파일 명 :  file-1665923160268
+업로드된 파일의 전체 경로  uploads/file-1665923160268
+사용자가 업로드한 파일 명 :  H10000000000.h5
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665923160268',
+  path: 'uploads/file-1665923160268',
+  size: 84536
+}
+H10000000000
+기존 파일 삭제
+[Object: null prototype] {}
+[
+  {
+    fieldname: 'file',
+    originalname: 'H10000000000.h5',
+    encoding: '7bit',
+    mimetype: 'text/plain',
+    destination: './uploads',
+    filename: 'file-1665923160268',
+    path: 'uploads/file-1665923160268',
+    size: 84536
+  }
+]
+H10000000000
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665923579122',
+  path: 'uploads/file-1665923579122',
+  size: 84536
+}
+destinatin에 저장된 파일 명 :  file-1665923579122
+업로드된 파일의 전체 경로  uploads/file-1665923579122
+사용자가 업로드한 파일 명 :  H10000000000.h5
+{
+  fieldname: 'file',
+  originalname: 'H10000000000.h5',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './uploads',
+  filename: 'file-1665923579122',
+  path: 'uploads/file-1665923579122',
+  size: 84536
+}
+H10000000000
+기존 파일 삭제
+[Object: null prototype] {}
+[
+  {
+    fieldname: 'file',
+    originalname: 'H10000000000.h5',
+    encoding: '7bit',
+    mimetype: 'text/plain',
+    destination: './uploads',
+    filename: 'file-1665923579122',
+    path: 'uploads/file-1665923579122',
+    size: 84536
+  }
+]
+{ mh_sn: 'H10000000000' }
+{ command_type: '2', time: 1665989397316 }
+insert OK
+H10000000000
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.48',
+  ev_hum: '30',
+  ev_co2: '746',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.46',
+  ev_hum: '30',
+  ev_co2: '747',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.48',
+  ev_hum: '30',
+  ev_co2: '746',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.51',
+  ev_hum: '30',
+  ev_co2: '745',
+  in_snore: '1',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.52',
+  ev_hum: '30',
+  ev_co2: '744',
+  in_snore: '1',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.52',
+  ev_hum: '30',
+  ev_co2: '743',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.58',
+  ev_hum: '30',
+  ev_co2: '742',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.56',
+  ev_hum: '30',
+  ev_co2: '741',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.56',
+  ev_hum: '30',
+  ev_co2: '741',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.58',
+  ev_hum: '30',
+  ev_co2: '740',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.62',
+  ev_hum: '30',
+  ev_co2: '740',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.65',
+  ev_hum: '30',
+  ev_co2: '739',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.66',
+  ev_hum: '30',
+  ev_co2: '740',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.65',
+  ev_hum: '30',
+  ev_co2: '740',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.71',
+  ev_hum: '30',
+  ev_co2: '740',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.72',
+  ev_hum: '29',
+  ev_co2: '739',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.72',
+  ev_hum: '29',
+  ev_co2: '738',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ev_temp: '23.76',
+  ev_hum: '29',
+  ev_co2: '739',
+  in_snore: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}
+{
+  mh_sn: 'H10000000000',
+  ble_connect: '0',
+  current_temp: '0',
+  setting_temp: '0',
+  off_time: '0',
+  on_time: '0',
+  mode: '0',
+  cover: '0',
+  water_level: '0',
+  pump: '0',
+  heater: '0',
+  error: '0',
+  time: '0'
+}

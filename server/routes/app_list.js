@@ -141,9 +141,13 @@ router.post("/sign_in", async (req, res) => { //로그인
 });
 
 router.post("/information", async (req, res) => { //인포메이션 찾기
-   
-    console.log(req.body);
-    Information.findOne({ serialnum: req.body.serial }, (err,info) => {
+    let user = await User.find({serialnum : req.body.serial });
+
+    var i = Math.floor(Math.random() * (user[0].rec.length ));
+
+    console.log(i);
+
+    Information.findOne({ category : user[0].rec[i] }, (err,info) => {
         if (err){
             const result123 = {
                 code: 100,
@@ -157,13 +161,7 @@ router.post("/information", async (req, res) => { //인포메이션 찾기
             res.send(result);
         }
         else if(info){
-            const r1 = {
-                code: 200,
-                msg: 'sucess',
-                category : info.category,
-                content : info.content
-            };
-            res.send(r1);
+            res.send(info);
         }
         else{
             const re = {
@@ -177,7 +175,8 @@ router.post("/information", async (req, res) => { //인포메이션 찾기
 });
 
 router.post("/information/deep_sleep", async (req, res) => { //인포메이션 찾기
-   
+    
+    
 
     Information.find((err,info) => {
         if (err){
@@ -464,7 +463,13 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
         tmp1 = sleep.time;
         console.log("1");
 
-        var en = await Enviroment_data.find({serial: serial, time: {$gt : tmp1, $lt : tmp2} });
+        let r_today = new Date(tmp1); 
+        let r_year = r_today.getFullYear(); // 년도
+        let r_month = r_today.getMonth() + 1;  // 월
+        let r_date = r_today.getDate();  //   
+        let req_date = (r_year + '-' + r_month + '-' + r_date);  
+
+        var en = await Enviroment_data.find({mh_sn: serial, time: {$gt : tmp1, $lt : tmp2} });
         console.log("1");
         var snore = await Snore_data.find({serial: serial, time: {$gt : tmp1, $lt : tmp2} });
         var tem_avg = 0;
@@ -479,8 +484,8 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
 
         var sleep_time = Math.trunc((tmp2 - tmp1) /1000 /60 /60);
         console.log(sleep_time);
-
-        var mat_ch = await Mat.find({serial: serial});
+/*
+        var mat_ch = await Mat.find({mh_sn: serial});
 
         console.log(mat_ch);
 
@@ -501,13 +506,15 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
             console.log(m_count);
         }
 
-        let mat_1 = await Mat.update({serial: serial, time: {$gt : tmp1, $lt : tmp2} }, {
+        let mat_1 = await Mat.update({mh_sn: serial, time: {$gt : tmp1, $lt : tmp2} }, {
             $set: {
                 s_day : m_count + 1
             }
         });
-
+*/
         // tmp1 ~ tmp2 사이 값 쿼리
+
+        /*
         for( i=0; i<en.length; i++){
             tem_avg += en[i].ev_temp;
             console.log(tem_avg);
@@ -524,7 +531,7 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
 
             if(i==en.length-1){
                 hum_avg = hum_avg/en.length;
-                console.log(um_avg);
+                console.log(hum_avg);
             }
         }
 
@@ -538,7 +545,7 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
             }
         }
 
-
+*/
         var j = 0;
 
         while(j+1<snore.length && snore[j].min == snore[j+1].min){
@@ -647,7 +654,8 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
                 hum: hum_avg,
                 sleep_time: sleep_time,
                 snore: snore_min,
-                seq: tmp
+                seq: tmp,
+                date : req_date
             });
     
             const saveToday=await today.save();
@@ -692,18 +700,20 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
 
 router.post("/today_sleep", async (req, res) => { 
     try { 
-        let today = await Today.findOne({ serial: req.body.serialnum }).sort({"_id":-1}).limit(1);
-
+        let today = await Today.findOne({ serial: req.body.serial }).sort({"_id":-1}).limit(1);
+        let env = await Enviroment_data.findOne({ mh_sn: req.body.serial }).sort({"_id":-1}).limit(1);
         console.log(today);
+        console.log(env);
 
         const r1 = {
             code: 200,
             msg: 'sucess',
-            temp: today.temp,
-            co2: today.co2,
-            hum: today.hum,
+            temp: Math.floor(env.ev_temp),
+            co2: env.ev_co2,
+            hum: env.ev_hum,
             sleep_time: today.sleep_time,
-            snore: today.snore
+            snore: today.snore,
+            date : today.date
         };
 
         res.send(r1);

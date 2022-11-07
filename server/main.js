@@ -11,6 +11,7 @@ var Snore_data=require("./models/snore_data");
 var Bed_data=require("./models/bed_data");
 var Mat_data=require("./models/mat_data");
 var Ack_data=require("./models/ack_data");
+var S_ch=require("./models/s_ch");
 var Control=require("./models/control");
 const Information = require("./models/information");
 var mqtt=require('mqtt');
@@ -136,6 +137,8 @@ client.on('message', async (topic,message)=>{
         var snore_data= JSON.parse(message);
         console.log(snore_data);
 
+        let check = await S_ch.findOne({ serial: snore_data.mh_sn }).sort({"_id":-1}).limit(1);
+
         let day = new Date(); // 현재 시간 구하는 함수
         let cur_time = day.getTime();
         let min = day.getMinutes();
@@ -150,11 +153,22 @@ client.on('message', async (topic,message)=>{
                 //"count" : 100
                 "foot_count" : 0
             };
+
+            let s_ch = S_ch({
+                serial : snore_data.mh_sn,
+                time : cur_time
+            });
+
             var options = {
                 qos:1
             };
+
             var bed_control = 'command/' + MH_sn;
-            client.publish(bed_control,JSON.stringify(bed_c),options);
+
+            if(parseInt(check.time) + 60000 < cur_time){
+                client.publish(bed_control,JSON.stringify(bed_c),options);
+            }
+            
         }
         else{
             bed_c = {
@@ -165,11 +179,20 @@ client.on('message', async (topic,message)=>{
                 //"count" : 100
                 "foot_count" : 0
             };
+
+            let s_ch = S_ch({
+                serial : snore_data.mh_sn,
+                time : cur_time
+            });
+
             var options = {
                 qos:1
             };
             var bed_control = 'command/' + MH_sn;
-            client.publish(bed_control,JSON.stringify(bed_c),options);
+
+            if(parseInt(check.time) < cur_time){
+                client.publish(bed_control,JSON.stringify(bed_c),options);
+            }
         }
 
         let s_d = Snore_data({
@@ -192,9 +215,10 @@ client.on('message', async (topic,message)=>{
 
         try{
             const saveSnore_data=await s_d.save();
+            const saveS_ch=await s_ch.save();
             //console.log("Snore data insert OK");
             }
-            catch(err){
+        catch(err){
             console.log({message:err});
             }
     }
