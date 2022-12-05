@@ -22,7 +22,7 @@ const schedule = require('node-schedule');
 
 router.post("/sign_up", async (req, res) => { //회원가입
 
-    console.log(req.body);
+    console.log(req.body + '\n' + "sigh up");
 
     let timestamp = + new Date();
 
@@ -39,7 +39,7 @@ router.post("/sign_up", async (req, res) => { //회원가입
         };
 
         if (user) {
-            console.log(user);
+            console.log(user + '\n' + "user info");
             return res.send(re);
         }
         /*
@@ -145,7 +145,7 @@ router.post("/information", async (req, res) => { //인포메이션 찾기
 
     var i = Math.floor(Math.random() * (user[0].rec.length ));
 
-    console.log(i);
+    //console.log(i);
 
     Information.findOne({ category : user[0].rec[i] }, (err,info) => {
         if (err){
@@ -252,7 +252,7 @@ router.post("/information/recommend", async (req, res) => { //인포메이션 �
 
 router.post("/survey", async (req, res) => { //설문조사
    
-    console.log(req.body);
+    console.log(req.body + '\n' + "user survey");
 
     try { // id 비교
         serial = req.body.serialnum
@@ -290,7 +290,7 @@ router.post("/survey", async (req, res) => { //설문조사
 
 router.post("/change", async (req, res) => {
     
-    console.log(req.body);
+    console.log(req.body + '\n' + "user info change");
     
     try { // id 비교 
         serial = req.body.serialnum;
@@ -385,6 +385,8 @@ router.post("/pw_2", async (req, res) => { //비밀번호 찾기(비밀번호 �
 
 router.post("/sleep_check", async (req, res) => {
     try { // id 비교
+        console.log("sleep start");
+
         serial = req.body.serialnum
         time = req.body.time
         let day = new Date(); // 현재 시간 구하는 함수
@@ -451,17 +453,17 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
         time = req.body.time
 
         let day = new Date(); // 현재 시간 구하는 함수
-        console.log("1");
+        console.log('\n\n'  + "wake up!" + '\n\n');
         let tmp2 = day.getTime();
         if(time){
             tmp2 = time.toString();
         }
 
-        console.log("1");
+        
         let sleep = await Bed.findOne({ serial: serial, msg: "sleep" }).sort({"_id":-1}).limit(1);
-        console.log(sleep);
+        console.log(sleep + '\n' + "sleep data");
         tmp1 = sleep.time;
-        console.log("1");
+        
 
         let r_today = new Date(tmp1); 
         let r_year = r_today.getFullYear(); // 년도
@@ -470,7 +472,7 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
         let req_date = (r_year + '-' + r_month + '-' + r_date);  
 
         var en = await Enviroment_data.find({mh_sn: serial, time: {$gt : tmp1, $lt : tmp2} });
-        console.log("1");
+        
         var snore = await Snore_data.find({serial: serial, time: {$gt : tmp1, $lt : tmp2} });
         var tem_avg = 0;
         var hum_avg = 0;
@@ -483,7 +485,7 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
         var m_count = 0;
 
         var sleep_time = Math.trunc((tmp2 - tmp1) /1000 /60 /60);
-        console.log(sleep_time);
+        
 /*
         var mat_ch = await Mat.find({mh_sn: serial});
 
@@ -559,15 +561,15 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
             var snore_sec = [];
             
             
-            console.log("b");
+            
 
             if(snore[j].check == "1"){
-                console.log("c");
+                
                 s1 =Math.max(snore[j].snore_db1, snore[j].snore_db2, snore[j].snore_db3, snore[j].snore_db4, snore[j].snore_db5, 
                     snore[j].snore_db6, snore[j].snore_db7, snore[j].snore_db8, snore[j].snore_db9, snore[j].snore_db10);
 
                 snore_sec.push(s1);
-                console.log(snore_sec);
+                
                 s_count++;
             }
 
@@ -585,7 +587,7 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
                 }
                 snore_min.push(s3);
                 s_count = 0;
-                console.log("코골이 : " + snore_min);
+                //console.log("코골이 : " + snore_min);
                 break;
             }
             else if(snore[j].min != snore[j+2].min){
@@ -601,10 +603,10 @@ router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수
                 }
                 snore_min.push(s3);
                 s_count = 0;
-                console.log("코골이 : " + snore_min);
+                //console.log("코골이 : " + snore_min);
             }
 
-            console.log("e");
+        
 
              if(snore[j+1].min != snore[j+2].min){
                 j += 2;
@@ -702,8 +704,8 @@ router.post("/today_sleep", async (req, res) => {
     try { 
         let today = await Today.findOne({ serial: req.body.serial }).sort({"_id":-1}).limit(1);
         let env = await Enviroment_data.findOne({ mh_sn: req.body.serial }).sort({"_id":-1}).limit(1);
-        console.log(today);
-        console.log(env);
+        console.log(today + '\n' + "today sleep info");
+        console.log(env + '\n' + "bed enviroment data");
 
         const r1 = {
             code: 200,

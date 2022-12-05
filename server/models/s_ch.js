@@ -8,8 +8,10 @@ serial: {
 time: {
     type : String,
     required: true
-}
+},
+count : {
+    type : Number
 
-});
+}});
 
 module.exports = s_ch = mongoose.model("s_ch", S_chSchema);

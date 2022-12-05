@@ -50,7 +50,7 @@ client.on('message', async (topic,message)=>{
 */
     if(topic==='connect'){
         var data=JSON.parse(message);
-        console.log(data);
+        console.log(data + '\n\n' + "AI motion bed parering" + '\n\n');
         MH_sn = data.mh_sn;
         let day = new Date(); 
         let cur_time = day.getTime();
@@ -70,8 +70,8 @@ client.on('message', async (topic,message)=>{
 
         try{
             const saveMotion_bed=await motion_bed.save();
-            console.log("insert OK");
-            console.log(MH_sn);
+            //console.log("insert OK");
+            //console.log(MH_sn);
             }
             catch(err){
             console.log({message:err});
@@ -82,7 +82,7 @@ client.on('message', async (topic,message)=>{
 
     if(topic===env_t){
         var env_data= JSON.parse(message);
-        console.log(env_data);
+        //console.log(env_data);
         let day = new Date(); 
         let cur_time = day.getTime();
 
@@ -109,7 +109,7 @@ client.on('message', async (topic,message)=>{
 
     if(topic===pose_t){
         var pose_data= JSON.parse(message);
-        console.log(pose_data);
+        //console.log(pose_data);
         let day = new Date(); 
         let cur_time = day.getTime();
 
@@ -135,7 +135,9 @@ client.on('message', async (topic,message)=>{
 
     if(topic===snore_t){
         var snore_data= JSON.parse(message);
-        console.log(snore_data);
+        
+        //console.log("snore data insert" + '\n');
+        //console.log(snore_data);
 
         let check = await S_ch.findOne({ serial: snore_data.mh_sn }).sort({"_id":-1}).limit(1);
 
@@ -149,15 +151,9 @@ client.on('message', async (topic,message)=>{
                 "function_mode" : 1,
                 "command_type" :4,
                 "mh_sn" : MH_sn,
-                "head_count" : 1,
-                //"count" : 100
+                "head_count" : 5,
                 "foot_count" : 0
             };
-
-            let s_ch = S_ch({
-                serial : snore_data.mh_sn,
-                time : cur_time
-            });
 
             var options = {
                 qos:1
@@ -165,33 +161,101 @@ client.on('message', async (topic,message)=>{
 
             var bed_control = 'command/' + MH_sn;
 
-            if(parseInt(check.time) + 60000 < cur_time){
-                client.publish(bed_control,JSON.stringify(bed_c),options);
+            if(check){
+                if(parseInt(check.time) + 1000 < cur_time){
+                    if(check.count < 45){
+                        client.publish(bed_control,JSON.stringify(bed_c),options);
+                        if(check.count){
+                            checkc = check.count;
+                        }
+                        else{
+                            checkc = 0;
+                        }
+                        let sch = S_ch({
+                            serial : snore_data.mh_sn,
+                            time : cur_time,
+                            count : checkc + 5
+                        });
+                        try{
+                            const saveS_ch=await sch.save();
+                            //console.log("Snore data insert OK");
+                            }
+                        catch(err){
+                            console.log({message:err});
+                            }
+                    }
+                    else{
+                        console.log("maximum angle");
+                    }
+                }       
             }
-            
+            else{
+                let sch = S_ch({
+                    serial : snore_data.mh_sn,
+                    time : cur_time,
+                    count : 5
+                });
+                client.publish(bed_control,JSON.stringify(bed_c),options);
+                try{
+                    const saveS_ch=await sch.save();
+                    //console.log("Snore data insert OK");
+                    }
+                catch(err){
+                    console.log({message:err});
+                    }
+            }
         }
         else{
             bed_c = {
                 "function_mode" : 1,
                 "command_type" :4,
                 "mh_sn" : MH_sn,
-                //"head_count" : down,
-                //"count" : 100
+                "head_count" : -5,
                 "foot_count" : 0
             };
-
-            let s_ch = S_ch({
-                serial : snore_data.mh_sn,
-                time : cur_time
-            });
 
             var options = {
                 qos:1
             };
             var bed_control = 'command/' + MH_sn;
 
-            if(parseInt(check.time) < cur_time){
+            if(check){
+                if(parseInt(check.time) + 120000 < cur_time){
+                    if(check.count){
+                        checkc = check.count;
+                    }
+                    else{
+                        checkc = 0;
+                    }
+                    let sch = S_ch({
+                        serial : snore_data.mh_sn,
+                        time : cur_time,
+                        count : checkc - 5
+                    });
+                    client.publish(bed_control,JSON.stringify(bed_c),options);
+                    try{
+                        const saveS_ch=await sch.save();
+                        //console.log("Snore data insert OK");
+                        }
+                    catch(err){
+                        console.log({message:err});
+                        }
+                }
+            }
+            else{
                 client.publish(bed_control,JSON.stringify(bed_c),options);
+                let sch = S_ch({
+                    serial : snore_data.mh_sn,
+                    time : cur_time,
+                    count : 0
+                });
+                try{
+                    const saveS_ch=await sch.save();
+                    //console.log("Snore data insert OK");
+                    }
+                catch(err){
+                    console.log({message:err});
+                    }
             }
         }
 
@@ -215,7 +279,6 @@ client.on('message', async (topic,message)=>{
 
         try{
             const saveSnore_data=await s_d.save();
-            const saveS_ch=await s_ch.save();
             //console.log("Snore data insert OK");
             }
         catch(err){
@@ -227,9 +290,9 @@ client.on('message', async (topic,message)=>{
 
     if(topic===bed_t){
         
-        var bed_data= JSON.parse(message);
+        //var bed_data= JSON.parse(message);
         
-        console.log(bed_data);
+        //console.log(bed_data);
         
         let day = new Date(); 
         let cur_time = day.getTime();
@@ -255,7 +318,7 @@ client.on('message', async (topic,message)=>{
 
     if(topic===mat_t){
         var mat_data= JSON.parse(message);
-        console.log(mat_data);
+        //console.log(mat_data);
         let day = new Date(); 
         let cur_time = day.getTime();
         let m_d = Mat_data({
@@ -427,52 +490,16 @@ Enviroment_data.find(function(err, a){
 });
 */
 
-app.post("/angle", async (req, res) => {
-
-    console.log(req.body);
-
+app.post("/angle", async (req, res) => {  
     try {
-       
-        sid = req.body.serialnum
-        let today = new Date();
-        let cur_time = today.toLocaleString();
-      /*
-        let today = new Date();
-        let cur_time = today.toLocaleString();
-        let control = await control.findOne({ serialnum: sid }); // control table 필요
-        let timestamp = + new Date();
-        control = new Control({
-            command_type : "4",
-            mh_sn : sid,
-            head_count : req.body.head_count,
-            foot_count : req.body.foot_count,
-            time : timestamp,
-            function_mode : "?" //function mode 처리 부분이 어디인지
-        });
+        var sid = req.body.serialnum
+        var msg = req.body.btnnum;
 
-        const saveControl=await control.save();
-        const r1 = {
-            code: 200,
-            msg: 'sucess'
-        };
-        res.send(r1);
-*/
         var options = {
             qos:1
         };
-        var bed_control = 'command/' + sid;
 
-        var bed_control1 = '/command/' + sid;
-        var a = 4;
-        var b = 1000;
-        var c = 0;
-        var d = 1;
-        
-        var msg = req.body.btnnum;
-        //console.log(msg)
-        
-        var head_count= 0;
-        var leg_count=0;
+        var bed_control = 'command/' + sid;
         
         if(msg== "headup" ){
             bed_c = {
@@ -480,34 +507,8 @@ app.post("/angle", async (req, res) => {
                 "command_type" :4,
                 "mh_sn" : sid,
                 "head_count" : 3,
-                //"count" : 100
                 "foot_count" : 0
             };
-            /*
-            let control = await Control.findOne({ serial: sid }).sort({"_id":-1}).limit(1);
-            if(control){
-                head_count = control.head_count + 5;
-                leg_count = control.leg_count;
-                control = new Control({
-                    time: cur_time,
-                    head_count: head_count,
-                    leg_count: leg_count,
-                    serial : sid
-                });
-                const saveControl=await control.save();
-            }
-            else{
-                head_count = 5;
-                leg_count = 0;
-                control = new Control({
-                    time: cur_time,
-                    head_count: head_count,
-                    leg_count: leg_count,
-                    serial : sid
-                });
-                const saveControl=await control.save();
-            }
-            */
         }
         else if(msg == "headdown"){
             bed_c = {
@@ -515,11 +516,8 @@ app.post("/angle", async (req, res) => {
                 "command_type" :4,
                 "mh_sn" : sid,
                 "head_count" : -3,
-                //"count" : 100
                 "foot_count" : 0
             };
-            
-        
         }
         else if(msg == "legup"){
             bed_c = {
@@ -527,10 +525,8 @@ app.post("/angle", async (req, res) => {
                 "command_type" :4,
                 "mh_sn" : sid,
                 "head_count" : 0,
-                //"count" : 100
                 "foot_count" : 3
-            };
-            
+            };       
         }
         else if(msg == "legdown"){
             bed_c = {
@@ -538,7 +534,6 @@ app.post("/angle", async (req, res) => {
                 "command_type" :4,
                 "mh_sn" : sid,
                 "head_count" : 0,
-                //"count" : 100
                 "foot_count" : -3
             };
         }
@@ -548,7 +543,6 @@ app.post("/angle", async (req, res) => {
                 "command_type" :4,
                 "mh_sn" : sid,
                 "head_count" : 0,
-                //"count" : 100
                 "foot_count" : 0
             };
         }
@@ -558,35 +552,17 @@ app.post("/angle", async (req, res) => {
                 "command_type" :4,
                 "mh_sn" : sid,
                 "head_count" : 0,
-                //"count" : 100
                 "foot_count" : 0
             };
         }
-/*
-        bed_c = {
-            "function_mode" : d,
-            "command_type" :a,
-            "mh_sn" : sid,
-            "head_count" : head_count,
-            //"count" : 100
-            "foot_count" : leg_count
-        };
-*/
 
-        
-        
-        console.log(bed_c)
-        
-        //client.publish(bed_control,JSON.stringify(bed_c));
+        console.log(bed_c + '\n\n' + "remote control" + '\n\n');
         client.publish(bed_control,JSON.stringify(bed_c),options);
-        //client.publish('common/H10000000000',JSON.stringify(bed_c),options);
-        //client.publish('common',JSON.stringify(bed_c),options);
 
         const result = {
             code: 200,
             msg: 'sucess'
         };
-        //client.publish(bed_control1, JSON.stringify(bed_c));
         res.send(result);
     }
     catch (error) {
@@ -601,7 +577,7 @@ app.post("/angle", async (req, res) => {
 
 app.post("/info", async (req, res) => { 
 
-    console.log(req.body);
+    //console.log(req.body);
 
     try { 
         information = new Information({
@@ -653,6 +629,7 @@ app.post("/mat_control", async (req, res) => {
                 msg: 'sucess',
                 temp : mat.current_temp 
             };
+            client.publish(bed_control,JSON.stringify(mat_c),options);
             res.send(result);
         }
         else if(msg == "tempdown"){
@@ -667,6 +644,7 @@ app.post("/mat_control", async (req, res) => {
                 msg: 'sucess',
                 temp : mat.current_temp 
             };
+            client.publish(bed_control,JSON.stringify(mat_c),options);
             res.send(result);
         }
         else if(msg == "power"){
@@ -681,11 +659,12 @@ app.post("/mat_control", async (req, res) => {
                 msg: 'sucess',
                 temp : mat.current_temp 
             };
+            client.publish(bed_control,JSON.stringify(mat_c),options);
             res.send(result);
         }
         else if(msg == "now"){
             let mat = await Mat_data.findOne({ mh_sn: sid }).sort({"_id":-1}).limit(1);
-            console.log(mat);
+            //console.log(mat);
             const result_now = {
                 code: 200,
                 msg: 'sucess',
@@ -694,9 +673,8 @@ app.post("/mat_control", async (req, res) => {
             res.send(result_now);
         }
        
-        console.log(mat_c)
         
-        client.publish(bed_control,JSON.stringify(mat_c),options);
+        
 
         
     }

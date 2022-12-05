@@ -209,7 +209,7 @@ router.get("/serial_res", async (req, res) => {// 초기 학습 시 시리얼 �
             var serial = user[i].serialnum;
 >*/
             let options = {
-                args: "H10000000000"
+                args: "4stup"
             };
             
 
@@ -353,8 +353,8 @@ router.post("/rec", async (req, res) => { //온도 추천을 위한 데이터 �
         // 맞춤형 온도 서비스 모델에 사용
         serial = req.body.serialnum;
 
-        var mat_1 = await Mat.find({mh_sn: serial, s_day : 9/*{ $gt: 0 }*/ }, 
-        {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true}).sort({"_id":-1}).limit(4180);
+        var mat_1 = await Mat.find({mh_sn: serial, s_day : 3/*{ $gt: 0 }*/ }, //마지막 수면을 가져오게 해야 함
+        {"_id":false, "mh_sn":true, "current_temp" : true, "setting_temp" : true, "time":true, "s_day":true}).sort({"_id":1}).limit(4180);
         
         const mat_json = JSON.parse(JSON.stringify(mat_1));
         console.log(mat_1);

@@ -301,4 +301,97 @@ router.post("/mat", async (req, res) => {
     } 
 });
 
+router.post("/mat_1", async (req, res) => { 
+    try { // id 비교 
+
+        console.log("실행");
+        let day = new Date(); // 현재 시간 구하는 함수
+        //let cur_time = day.toLocaleString();
+        let time1 = req.body.t1;
+        var time2 = req.body.t2;
+        var i = time1;
+        var cur = req.body.cur;
+        var set = req.body.set;
+        var s_day = req.body.day;
+
+        for(i ; i<time2 ; i+=5000){ //3초
+            console.log("실행" + i)
+
+            if(i == time1 + 600000){ //1분
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 2400000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 3600000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 4800000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 6000000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 7200000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 8400000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 9600000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 +10800000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 12000000){
+                cur = cur - 0.3;
+            }
+            else if(i == time1 + 13200000){
+                cur = cur - 0.3;
+            }
+
+            console.log("if문 실행");
+
+            var mat_time = i.toString();
+
+            let mat = new Mat_data({
+                mh_sn : "4stup",
+                ble_connect : 1,
+                current_temp : cur, /*default, max, unique ... */
+                setting_temp : set,
+                off_time : 0,
+                on_time : 0,
+                mode : 1,
+                cover: 0,
+                water_level: 1,
+                pump: 1,
+                heater: 1,
+                error: 0,
+                time : mat_time,
+                s_day : s_day
+                });
+    
+            const saveMat_data=await mat.save();
+            console.log(mat);
+        }
+
+        console.log("End");
+        const r1 = {
+            code: 200,
+            msg: 'sucess'
+        };
+        res.send(r1);
+        
+    } 
+    catch (error) {
+        console.error(error.message);
+        const result = {
+            code: 500,
+            msg: 'server error'
+        };
+        res.send(result);
+    } 
+});
+
 module.exports = router; 
