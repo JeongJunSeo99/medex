@@ -445,7 +445,7 @@ router.post("/sleep_check", async (req, res) => {
         res.send(result);
     } 
 });
-
+//finla
 router.post("/wake_up_check", async (req, res) => { //여기에서 하루치 수면 저장
     try { 
         //하루치 수면 데이터 저장 할 때, 데이터 값을 하나 추가해 DB에 저장해 다른 날들과 구별해서 저장
