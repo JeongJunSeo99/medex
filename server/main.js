@@ -16,7 +16,7 @@ var Control=require("./models/control");
 const Information = require("./models/information");
 var mqtt=require('mqtt');
 var moment = require('moment');
-var client =mqtt.connect('mqtt://220.149.244.206:1883');
+var client =mqtt.connect('???');
 var MH_sn;
 const { PythonShell }= require("python-shell");
 const schedule = require('node-schedule');
