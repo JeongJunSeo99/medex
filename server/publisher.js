@@ -1,5 +1,5 @@
 var mqtt = require('mqtt');
-var client = mqtt.connect("mqtt://220.149.244.199:1833");
+var client = mqtt.connect("mqtt://???1833");
 
 buf ={
     "mh_sn":"123123"
