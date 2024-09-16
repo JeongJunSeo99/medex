@@ -45,7 +45,8 @@
   
 -------
   # 📘 ERD 
-  ![ERD_re](https://user-images.githubusercontent.com/82440364/124862837-0b063280-dff1-11eb-9eff-35e60fa0959a.PNG)
+![image](https://github.com/user-attachments/assets/fe5f77c4-bf7d-4358-a609-a9ee4b9c48d5)
+
 
 
   
